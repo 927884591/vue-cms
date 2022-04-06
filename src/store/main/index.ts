@@ -16,4 +16,7 @@ const store = createStore<IRootState>({
     loginState
   }
 })
+export function setupRouter() {
+  store.dispatch('loginState/actionLocal')
+}
 export default store

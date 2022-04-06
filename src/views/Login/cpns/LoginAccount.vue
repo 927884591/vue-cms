@@ -51,16 +51,17 @@ export default defineComponent({
     function accountLogin(isRePassword: boolean) {
       formRef.value?.validate((valid) => {
         if (valid) {
+          if (isRePassword) {
+            cache.setCache('name', account.name)
+            cache.setCache('password', account.password)
+          } else {
+            cache.removeCache('name')
+            cache.removeCache('password')
+          }
+          console.log({ ...account })
           store.dispatch('loginState/actionLoginAccount', { ...account })
         }
       })
-      if (isRePassword) {
-        cache.setCache('name', account.name)
-        cache.setCache('password', account.password)
-      } else {
-        cache.removeCache('name')
-        cache.removeCache('password')
-      }
     }
     return {
       account,
